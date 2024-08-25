@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neomorphic Scientific Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="icon" href="./DALL·E 2024-08-25 23.43.57 - A sleek and modern logo for a scientific calculator app, designed in a neomorphic style. The logo should feature a stylized calculator with distinct s.webp">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #e0e5ec;
+            margin: 0;
+        }
+        
+        .calculator {
+            font-family: "Poppins";
+            width: 320px;
+            padding: 20px;
+            border-radius: 30px;
+            background: #e0e5ec;
+            box-shadow: 10px 10px 20px #bebebe, -10px -10px 20px #ffffff;
+        }
+
+        .screen {
+            width: 100%;
+            height: 60px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            background-color: #e0e5ec;
+            box-shadow: inset 5px 5px 10px #bebebe, inset -5px -5px 10px #ffffff;
+            font-size: 22px;
+            color: #333;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .button {
+            width: 100%;
+            height: 60px;
+            border-radius: 15px;
+            background: #e0e5ec;
+            box-shadow: 5px 5px 10px #bebebe, -5px -5px 10px #ffffff;
+            font-size: 18px;
+            color: #333;
+            text-align: center;
+            line-height: 60px;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.2s ease;
+        }
+
+        .button:active {
+            box-shadow: inset 5px 5px 10px #bebebe, inset -5px -5px 10px #ffffff;
+        }
+
+        .button.operation {
+            background: #f6f8fa;
+        }
+
+        .button.clear {
+            background: #f44336;
+            color: white;
+        }
+
+        .button.equals {
+            background: #4caf50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="screen" id="screen"></div>
+        <div class="button-grid">
+            <div class="button clear">C</div>
+            <div class="button operation">sin</div>
+            <div class="button operation">cos</div>
+            <div class="button operation">tan</div>
+            <div class="button">7</div>
+            <div class="button">8</div>
+            <div class="button">9</div>
+            <div class="button operation">/</div>
+            <div class="button">4</div>
+            <div class="button">5</div>
+            <div class="button">6</div>
+            <div class="button operation">*</div>
+            <div class="button">1</div>
+            <div class="button">2</div>
+            <div class="button">3</div>
+            <div class="button operation">-</div>
+            <div class="button">0</div>
+            <div class="button">.</div>
+            <div class="button operation">+</div>
+            <div class="button equals">=</div>
+        </div>
+    </div>
+
+    <script>
+        const screen = document.getElementById('screen');
+        const buttons = document.querySelectorAll('.button');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                const value = button.textContent;
+
+                if (value === 'C') {
+                    screen.textContent = '';
+                } else if (value === '=') {
+                    try {
+                        screen.textContent = eval(screen.textContent);
+                    } catch {
+                        screen.textContent = 'Error';
+                    }
+                } else if (value === 'sin') {
+                    screen.textContent = Math.sin(parseFloat(screen.textContent)* Math.PI / 180).toFixed(4);
+                } else if (value === 'cos') {
+                    screen.textContent = Math.cos(parseFloat(screen.textContent)* Math.PI / 180).toFixed(8);
+                } else if (value === 'tan') {
+                    screen.textContent = Math.tan(parseFloat(screen.textContent)* Math.PI / 180).toFixed(8);
+                } else {
+                    screen.textContent += value;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
